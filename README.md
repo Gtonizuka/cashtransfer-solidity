@@ -22,7 +22,7 @@ This repo contains a generic workflow for a cash transfer system based on blockc
 - `npm run lint` to run linter
 
 ## Notes
-Please note that the repo currently contains the smart contract.
-The smart contract only compiles and runs exclusively on the local machine (e.g. it does not get deployed to testnet or mainnet).
+Please note that the current repo only contains one smart contract.
+The smart contract only compiles and runs exclusively on the local machine (e.g. it does not get deployed to testnet or mainnet as no config were provided).
 
 A `next-js` or `cra` frontend for the dapp could easily be added, pointing to the relevant smart contract.
