@@ -68,7 +68,11 @@ contract CashTransfer is Ownable {
         whitelistedAddresses[_addressToWhitelist] = true;
     }
 
-    // The IP requests for funds from UNICEF
+    /**
+     * @dev Create new funds request
+     * @param _title Project title
+     * @param _amount Funds requested
+     */
     function askFund(string memory _title, uint256 _amount) public isWhitelisted(msg.sender) {
         require(_amount > 0, "Amount too low");
 
@@ -87,6 +91,10 @@ contract CashTransfer is Ownable {
         emit AskFundEvent(msg.sender, _title, _amount, block.timestamp);
     }
 
+    /**
+     * @dev Approve request if valid
+     * @param _id ID of the request
+     */
     function approveRequest(uint256 _id) external onlyOwner {
         FundsRequest storage request = fundsRequest[_id];
 
@@ -113,6 +121,11 @@ contract CashTransfer is Ownable {
         emit RejectedRequest(_id);
     }
 
+    /**
+     * @dev Create new voucher
+     * @param _beneficiary Wallet address of beneficiary
+     * @param _amount Total voucher amount in USD
+     */
     function createVoucher(address _beneficiary, uint256 _amount) public isWhitelisted(msg.sender) {
         require(_amount > 0, "Amount too low");
 
@@ -130,6 +143,10 @@ contract CashTransfer is Ownable {
         emit VoucherCreated(voucherCounter);
     }
 
+    /**
+     * @dev Claim spendable voucher
+     * @param _id Voucher ID
+     */
     function claimVoucher(uint256 _id) public {
         Voucher storage existingVoucher = voucher[_id];
 
@@ -143,6 +160,10 @@ contract CashTransfer is Ownable {
         emit VoucherClaimed(_id);
     }
 
+    /**
+     * @dev Reimburse voucher funds to merchant
+     * @param _id Voucher ID
+     */
     function reimburseVoucher(uint256 _id) public {
         Voucher storage existingVoucher = voucher[_id];
 
@@ -154,6 +175,9 @@ contract CashTransfer is Ownable {
         emit VoucherReimbursed(_id);
     }
 
+    /**
+     * @dev Return unclaimed funds to UNICEF wallet
+     */
     function returnFundsToContract() public {
         for (uint256 i = 1; i <= counter; i++) {
             FundsRequest storage request = fundsRequest[i];
