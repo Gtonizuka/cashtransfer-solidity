@@ -1,6 +1,8 @@
-# UNICEF Cash Transfer smart contract
+# Cash Transfer smart contract
 
-This repo contains a generic workflow for a cash transfer system based on blockchain.
+This repo contains a generic workflow for a non-profit cash transfer system based on blockchain.
+For more info on cash transfers:
+https://www.unicef.org/topics/cash-transfers
 
 ## Prerequisites
 - NodeJS
